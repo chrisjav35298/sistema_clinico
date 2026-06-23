@@ -1,0 +1,32 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Listado de Pacientes</title>
+
+    <link rel="stylesheet" href="{% static 'pacientes/css/estilos.css' %}">
+</head>
+<body>
+
+<h1>{{ titulo }}</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Edad</th>
+    </tr>
+
+    {% for paciente in pacientes %}
+    <tr>
+        <td>{{ paciente.id }}</td>
+        <td>{{ paciente.nombre }}</td>
+        <td>{{ paciente.edad }}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+</body>
+</html>

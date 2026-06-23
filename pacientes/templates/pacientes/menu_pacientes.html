@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menú Pacientes</title>
+</head>
+<body>
+
+<h1>Menú de Pacientes</h1>
+<ul>
+    <li>
+        <a href="{% url 'pacientes:listado_pacientes' %}">
+            Listado de pacientes
+        </a>
+    </li>
+
+    <li>
+        <a href="{% url 'pacientes:detalle_atencion' %}">
+            Detalle de atención
+        </a>
+    </li>
+
+    <li>
+        <a href="{% url 'pacientes:buscar_paciente' %}?nombre=Juan">
+            Buscar paciente
+        </a>
+    </li>
+</ul>
+
+{{ fecha | date:"d M Y H:i:s" }}
+</body>
+</html>
