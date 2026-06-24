@@ -1,0 +1,65 @@
+.encabezado {
+    background-color: #5d3a7d;
+    color: white;
+    padding: 15px 0;
+}
+
+.encabezado-contenido {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.encabezado h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.encabezado nav {
+    display: flex;
+    gap: 15px;
+}
+
+.encabezado nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.encabezado nav a:hover {
+    text-decoration: underline;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    background-color: #eee6f7;
+    font-family: Arial, sans-serif;
+}
+
+.contenedor {
+    flex: 1;
+}
+
+.pie-pagina {
+    background-color: #111;
+    color: #d6d6d6;
+    text-align: center;
+    padding: 18px 20px;
+}
+
+.pie-pagina p {
+    margin: 0;
+}

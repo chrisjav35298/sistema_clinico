@@ -1,15 +1,11 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Detalle Atención</title>
-    <link rel="stylesheet" href="{% static 'pacientes/css/estilos.css' %}">
-</head>
-<body>
+{% extends "base.html" %}
 
-<h1>Detalle de atención clínica</h1>
-
-<table border="1" cellpadding="8">
+    {% block titulo %}
+        <title>Detalle de atención clínica</title>
+    {% endblock %}
+<h1></h1>
+{%block contenido%}
+<table class="tabla-pacientes">
     <tr>
         <th>ID Atención</th>
         <td>{{ atencion.id }}</td>
@@ -40,6 +36,4 @@
         <td>{{ atencion.estado }}</td>
     </tr>
 </table>
-
-</body>
-</html>
+{%endblock%}

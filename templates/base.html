@@ -1,24 +1,36 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{% block titulo %}Sistema de Clínica{% endblock %}</title>
+    {% block titulo %}
+        <title>Sistema de Clínica</title>
+    {% endblock %}
 
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    {% block estilos %}
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% endblock %}
 </head>
 <body>
 
-    {% include "includes/header.html" %}
+    {% block header %}
+        {% include "includes/header.html" %}
+    {% endblock %}
 
     <main class="contenedor">
         {% block contenido %}
         {% endblock %}
     </main>
 
-    {% include "includes/footer.html" %}
+    {% block footer %}
+        {% include "includes/footer.html" %}
+    {% endblock %}
+
+    {% block javascript %}
+    {% endblock %}
 
 </body>
 </html>

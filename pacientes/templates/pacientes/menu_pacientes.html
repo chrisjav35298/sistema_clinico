@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Menú Pacientes</title>
-</head>
-<body>
+{% extends "base.html" %}
 
+
+{% block contenido %}
 <h1>Menú de Pacientes</h1>
 <ul>
     <li>
@@ -25,7 +22,5 @@
         </a>
     </li>
 </ul>
+{% endblock %}
 
-{{ fecha | date:"d M Y H:i:s" }}
-</body>
-</html>
