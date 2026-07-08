@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import loader
-import datetime
+import datetime, requests
 
 
 
@@ -146,3 +146,22 @@ def menu(request):
 
     fecha= datetime.datetime.now()
     return render(request, "pacientes/menu_pacientes.html", {"fecha": fecha})
+
+
+
+
+
+def detalle_usuarios(request):
+    respuesta = requests.get(
+        "https://jsonplaceholder.typicode.com/users"
+    )
+
+    usuarios = respuesta.json()
+
+    return render(
+        request,
+        "pacientes/detalle_usuarios.html",
+        {
+            "usuarios": usuarios
+        }
+    )

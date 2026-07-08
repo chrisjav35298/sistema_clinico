@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    <title>Listado de usuarios</title>
+{% endblock %}
+
+{% block estilos %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'pacientes/css/estilos.css' %}">
+{% endblock %}
+{% block contenido %}
+
+<table class="tabla-pacientes">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Ciudad</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for usuario in usuarios %}
+        <tr>
+            <td>{{ usuario.id }}</td>
+            <td>{{ usuario.name }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>{{ usuario.address.city }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
