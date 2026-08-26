@@ -170,18 +170,14 @@ def detalle_usuarios(request):
     )
 
 def contacto(request):
-    print('observamos la info que viene en el request:', request)
-    print('que tiene el request:', request)
-    print('valor de request.method:', request.method)
-    print('valor de request.POST:', request.POST)
     if request.method == 'POST':
         form = ContactoForm(request.POST)
         if form.is_valid():
-            print('Formulario válido')
             nombre = form.cleaned_data['nombre']
             email = form.cleaned_data['email']
             mensaje = form.cleaned_data['mensaje']
+
             return HttpResponse(f"Gracias por tu mensaje, {nombre}. Nos pondremos en contacto con vos muy pronto.")
     else:
         form = ContactoForm()
-    return render(request, "pacientes/contacto-tipos.html", {"form": form})   
+    return render(request, "pacientes/contacto.html", {"form": form})   
