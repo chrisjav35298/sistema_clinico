@@ -3,6 +3,9 @@ from django.shortcuts import render
 from django.template import loader
 import datetime, requests
 
+from .forms import ContactoForm
+
+
 
 
 # Analizando sin render ni loader
@@ -165,3 +168,16 @@ def detalle_usuarios(request):
             "usuarios": usuarios
         }
     )
+
+def contacto(request):
+    if request.method == 'POST':
+        form = ContactoForm(request.POST)
+        if form.is_valid():
+            nombre = form.cleaned_data['nombre']
+            email = form.cleaned_data['email']
+            mensaje = form.cleaned_data['mensaje']
+
+            return HttpResponse(f"Gracias por tu mensaje, {nombre}. Nos pondremos en contacto con vos muy pronto.")
+    else:
+        form = ContactoForm()
+    return render(request, "pacientes/contacto.html", {"form": form})   

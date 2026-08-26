@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    <title>Listado de usuarios</title>
+{% endblock %}
+
+{% block estilos %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'pacientes/css/estilos.css' %}">
+{% endblock %}
+{% block contenido %}
+
+
+<div class="container my-5">
+    <h1 class="mb-4">Guía de Renderizado de Formularios en Django</h1>
+    <p class="lead">Diferentes formas de renderizar el objeto <code>form</code> en la plantilla.</p>
+
+    <!-- 1. RENDERIZADO BÁSICO DIRECTO -->
+    <div class="card mb-4">
+        <div class="card-header bg-dark text-white">
+            <h5 class="m-0">1. Renderizado Básico: <code>{{ form }}</code></h5>
+        </div>
+        <div class="card-body">
+            <p class="text-muted">Muestra los campos en línea de forma directa, sin etiquetas contenedoras (solo &lt;label&gt; e &lt;input&gt;).</p>
+            <form method="post">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit" class="btn btn-secondary mt-3">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 2. RENDERIZADO EN PÁRRAFOS (as_p) -->
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5 class="m-0">2. En párrafos: <code>{{ form.as_p }}</code></h5>
+        </div>
+        <div class="card-body">
+            <p class="text-muted">Envuelve cada pareja etiqueta/campo dentro de un párrafo (&lt;p&gt;).</p>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 3. RENDERIZADO EN LISTA (as_ul) -->
+    <div class="card mb-4">
+        <div class="card-header bg-success text-white">
+            <h5 class="m-0">3. En ítems de lista: <code>{{ form.as_ul }}</code></h5>
+        </div>
+        <div class="card-body">
+            <p class="text-muted">Renderiza los elementos en tags &lt;li&gt;. Requiere que agregues manualmente las etiquetas &lt;ul&gt;.</p>
+            <form method="post">
+                {% csrf_token %}
+                <ul>
+                    {{ form.as_ul }}
+                </ul>
+                <button type="submit" class="btn btn-success">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 4. RENDERIZADO EN TABLA (as_table) -->
+    <div class="card mb-4">
+        <div class="card-header bg-info text-white">
+            <h5 class="m-0">4. En tabla: <code>{{ form.as_table }}</code></h5>
+        </div>
+        <div class="card-body">
+            <p class="text-muted">Renderiza las filas (&lt;tr&gt;) y celdas (&lt;td&gt;). Requiere que agregues manualmente la etiqueta &lt;table&gt;.</p>
+            <form method="post">
+                {% csrf_token %}
+                <table class="table table-bordered">
+                    {{ form.as_table }}
+                </table>
+                <button type="submit" class="btn btn-info text-white">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    
+    <!-- 5. CAMPO POR CAMPO MANUAL -->
+    <div class="card mb-4">
+        <div class="card-header bg-danger text-white">
+            <h5 class="m-0">5. Control Manual Campo por Campo</h5>
+        </div>
+        <div class="card-body">
+            <p class="text-muted">Ideal para cuando querés armar layouts complejos (por ejemplo, poner nombre y apellido al lado del otro).</p>
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        {{ form.nombre.label_tag }}
+                        {{ form.nombre }}
+                        {{ form.nombre.errors }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        {{ form.email.label_tag }}
+                        {{ form.email }}
+                        {{ form.email.errors }}
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    {{ form.mensaje.label_tag }}
+                    {{ form.mensaje }}
+                    {{ form.mensaje.errors }}
+                </div>
+
+                <button type="submit" class="btn btn-danger">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
