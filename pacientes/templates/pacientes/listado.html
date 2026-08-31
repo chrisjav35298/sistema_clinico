@@ -13,6 +13,12 @@
 {% block contenido %}
     <h2>Listado de pacientes</h2>
 
+
+<!-- {% with numero=45 %}
+    <p>El resultado es: {{ numero|add:4 }}</p>
+{% endwith %} -->
+
+
 <table class="tabla-pacientes">
     <thead>
         <tr>
@@ -25,8 +31,8 @@
     <tbody>
         {% for paciente in pacientes %}
             <tr>
-                <td>{{ paciente.id }}</td>
-                <td>{{ paciente.nombre }}</td>
+                <td> {{ paciente.id }}</td>
+                <td>{{ paciente.nombre|upper }}</td>
                 <td>{{ paciente.edad }}</td>
             </tr>
         {% empty %}

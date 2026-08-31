@@ -37,40 +37,43 @@ from .forms import ContactoForm
 
 
 # Analizando sin render
-def listado_pacientes(request):
-
-    pacientes = [
-        {"id": 1, "nombre": "Juan Pérez", "edad": 34},
-        {"id": 2, "nombre": "Ana Gómez", "edad": 28},
-        {"id": 3, "nombre": "Carlos Ruiz", "edad": 45},
-    ]
-    titulo='Listado de pacientes-envaido desde contexto'
-
-    template = loader.get_template("pacientes/listado.html")
-
-    contexto = {
-        "pacientes": pacientes, 
-        "titulo": titulo
-    }
-
-    html = template.render(contexto, request)
-
-    return HttpResponse(html)
-
-
-
 # def listado_pacientes(request):
+#     print('observamos la info que viene en el request:', request)
+#     print('que tiene el request:', request)
 #     pacientes = [
-#         {"id": 1, "nombre": "Juan Pérez", "edad": 74},
+#         {"id": 1, "nombre": "Juan Pérez", "edad": 34},
 #         {"id": 2, "nombre": "Ana Gómez", "edad": 28},
 #         {"id": 3, "nombre": "Carlos Ruiz", "edad": 45},
 #     ]
+#     titulo='Listado de pacientes-envaido desde contexto'
 
-#     return render(
-#         request,
-#         "pacientes/listado.html",
-#         {"pacientes": pacientes}
-#     )
+#     template = loader.get_template("pacientes/listado.html")
+
+#     contexto = {
+#         "pacientes": pacientes, 
+#         "titulo": titulo
+#     }
+
+#     html = template.render(contexto, request)
+
+#     return HttpResponse(html)
+
+
+
+def listado_pacientes(request):
+    pacientes = [
+        {"id": 1, "nombre": "Juan Pérez", "edad": 74},
+        {"id": 2, "nombre": "Ana Gómez", "edad": 28},
+        {"id": 3, "nombre": "Carlos Ruiz", "edad": 45},
+    ]
+    dia= datetime.datetime.now().day
+
+    return render(
+        request,
+        "pacientes/listado.html",
+        {"pacientes": pacientes,
+         "dia": dia}
+    )
 
 
 
@@ -170,10 +173,16 @@ def detalle_usuarios(request):
     )
 
 def contacto(request):
+    print('observamos la info que viene en el request:', request)
+    print('que tiene el request:', request)
+    print('valor de request.method:', request.method)
+    print('valor de request.POST:', request.POST)
     if request.method == 'POST':
         form = ContactoForm(request.POST)
         if form.is_valid():
+            print('Formulario válido')
             nombre = form.cleaned_data['nombre']
+            apellido = form.cleaned_data['apellido']
             email = form.cleaned_data['email']
             mensaje = form.cleaned_data['mensaje']
 
