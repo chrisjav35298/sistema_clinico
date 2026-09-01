@@ -1,7 +1,24 @@
 from django import forms
+from .models import Paciente
 
 class ContactoForm(forms.Form):
     nombre = forms.CharField(label='Nombre', max_length=100)
     apellido = forms.CharField(label='Apellido', max_length=100)
     email = forms.EmailField(label='Correo electrónico')
     mensaje = forms.CharField(label='Mensaje', widget=forms.Textarea)
+
+
+
+
+
+class PacienteForm(forms.ModelForm):
+    class Meta:
+        model = Paciente
+        fields = [
+            "nombre",
+            "apellido",
+            "fecha_nacimiento",
+            "direccion",
+            "telefono",
+            "email",
+        ]

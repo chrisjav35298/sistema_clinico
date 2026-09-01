@@ -1,82 +1,10 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template import loader
 import datetime, requests
 
-from .forms import ContactoForm
-
-
-
-
-# Analizando sin render ni loader
-# def listado_pacientes(request):
-#     pacientes = [
-#         {"id": 1, "nombre": "Juan Pérez", "edad": 34},
-#         {"id": 2, "nombre": "Ana Gómez", "edad": 28},
-#         {"id": 3, "nombre": "Carlos Ruiz", "edad": 45},
-#     ]
-#     contenido = """
-#         <h1>Listado de pacientes</h1>
-#         <table border="1" cellpadding="8">
-#         <tr>
-#         <th>ID</th>
-#         <th>Nombre</th>
-#         <th>Edad</th>
-#         </tr>
-#         """
-#     for paciente in pacientes:
-#         contenido += f"""
-#                 <tr>
-#                 <td>{paciente['id']}</td>
-#                 <td>{paciente['nombre']}</td>
-#                 <td>{paciente['edad']}</td>
-#                 </tr>
-#                 """
-#     contenido += "</table>"
-#     return HttpResponse(contenido)
-
-
-# Analizando sin render
-# def listado_pacientes(request):
-#     print('observamos la info que viene en el request:', request)
-#     print('que tiene el request:', request)
-#     pacientes = [
-#         {"id": 1, "nombre": "Juan Pérez", "edad": 34},
-#         {"id": 2, "nombre": "Ana Gómez", "edad": 28},
-#         {"id": 3, "nombre": "Carlos Ruiz", "edad": 45},
-#     ]
-#     titulo='Listado de pacientes-envaido desde contexto'
-
-#     template = loader.get_template("pacientes/listado.html")
-
-#     contexto = {
-#         "pacientes": pacientes, 
-#         "titulo": titulo
-#     }
-
-#     html = template.render(contexto, request)
-
-#     return HttpResponse(html)
-
-
-
-def listado_pacientes(request):
-    pacientes = [
-        {"id": 1, "nombre": "Juan Pérez", "edad": 74},
-        {"id": 2, "nombre": "Ana Gómez", "edad": 28},
-        {"id": 3, "nombre": "Carlos Ruiz", "edad": 45},
-    ]
-    dia= datetime.datetime.now().day
-
-    return render(
-        request,
-        "pacientes/listado.html",
-        {"pacientes": pacientes,
-         "dia": dia}
-    )
-
-
-
+from .forms import ContactoForm, PacienteForm
+from .models import Paciente
 
 
 def detalle_atencion(request):
@@ -141,13 +69,6 @@ def buscar(request):
 
 
 
-
-
-
-    return render(request, "pacientes/atencion.html", {"atencion": atencion}
-    )
-
-
 def menu(request):
 
     fecha= datetime.datetime.now()
@@ -190,3 +111,30 @@ def contacto(request):
     else:
         form = ContactoForm()
     return render(request, "pacientes/contacto.html", {"form": form})   
+
+
+
+
+def nuevo_paciente(request):
+    if request.method == 'POST':
+        form = PacienteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("listado_pacientes")
+
+    else:
+        form = PacienteForm()
+    return render(request, "pacientes/paciente_form.html", {"form": form})
+
+
+
+def listado_pacientes(request):
+    pacientes = Paciente.objects.all()
+    dia= datetime.datetime.now().day
+
+    return render(
+        request,
+        "pacientes/listado.html",
+        {"pacientes": pacientes,
+         "dia": dia}
+    )
