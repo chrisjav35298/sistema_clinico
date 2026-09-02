@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    <title>Listado de pacientes</title>
+{% endblock %}
+
+{% block estilos %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'pacientes/css/estilos.css' %}">
+{% endblock %}
+
+{% block contenido %}
+    <h2>Listado de pacientes</h2>
+
+
+<!-- {% with numero=45 %}
+    <p>El resultado es: {{ numero|add:4 }}</p>
+{% endwith %} -->
+
+
+<table class="tabla-pacientes">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for especialidad in especialidades %}
+            <tr>
+                <td> {{ especialidad.id }}</td>
+                <td>{{ especialidad.nombre|upper }}</td>
+                <td>{{ especialidad.descripcion }}</td>
+                <td>
+                    <a href="{% url 'especialidades:editar_especialidad' especialidad.id %}" class="btn btn-primary">Editar</a>
+                    <a href="{% url 'especialidades:eliminar_especialidad' especialidad.id %}" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="7">No hay pacientes registrados.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<!-- creamos un boton para volver al menu-->
+<a href="{% url 'especialidades:menu_especialidades' %}" class="btn btn-primary">Volver al Menú</a>
+<a href="{% url 'especialidades:nueva_especialidad' %}" class="btn btn-success">Crear Especialidad</a>
+{% endblock %}
+

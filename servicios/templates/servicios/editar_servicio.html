@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block titulo %}
+   <title>Crear servicio</title>
+{% endblock %}
+
+
+{% block estilos %}
+   {{ block.super }}
+   <link rel="stylesheet" href="{% static 'pacientes/css/estilos.css' %}">
+{% endblock %}
+{% block contenido %}
+
+
+<div class="container">
+   <h1>Nuevo</h1>
+   <form method="post">
+       {% csrf_token %}
+       {{ form.as_p }}
+       <button type="submit" class="btn btn-primary">Enviar</button>
+   </form>
+   <br>
+   
+   <a href="{% url 'servicios:menu' %}" class="btn btn-success">Volver al Menú</a>
+</div>
+
+
+{% endblock %}

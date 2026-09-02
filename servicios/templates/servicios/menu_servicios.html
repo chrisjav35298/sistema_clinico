@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+
+{% block contenido %}
+<h1>Menú de servicios</h1>
+<ul>
+    <li>
+        <a href="{% url 'servicios:listado_servicios' %}">
+            servicios
+        </a>
+    </li>
+        <li>
+        <a href="{% url 'servicios:nuevo_servicio' %}">
+            Nuevo Servicio
+        </a>
+    </li>
+</ul>
+{% endblock %}

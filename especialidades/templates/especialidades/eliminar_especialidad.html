@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    <title>Listado de pacientes</title>
+{% endblock %}
+
+{% block estilos %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'pacientes/css/estilos.css' %}">
+{% endblock %}
+
+{% block contenido %}
+    <h2>Eliminar especialidad</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <p>
+        ¿Está seguro que desea eliminar
+        "{{ especialidad.nombre }}"?
+    </p>
+
+    <button type="submit">Sí, eliminar</button>
+</form>
+   <br>
+   
+   <a href="{% url 'especialidades:menu_especialidades' %}" class="btn btn-success">Volver al Menú</a>
+{% endblock %}
+

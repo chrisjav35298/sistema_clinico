@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+
+{% block contenido %}
+<h1>Menú de Especialidades</h1>
+<ul>
+    <li>
+        <a href="{% url 'especialidades:listado_especialidades' %}">
+            Especialidades
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'especialidades:nueva_especialidad' %}">
+            Nueva Especialidad
+        </a>
+    </li>
+
+</ul>
+{% endblock %}

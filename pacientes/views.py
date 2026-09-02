@@ -124,7 +124,7 @@ def nuevo_paciente(request):
 
     else:
         form = PacienteForm()
-    return render(request, "pacientes/paciente_form.html", {"form": form})
+    return render(request, "pacientes/crear_paciente.html", {"form": form})
 
 
 
@@ -134,7 +134,7 @@ def listado_pacientes(request):
 
     return render(
         request,
-        "pacientes/listado.html",
+        "pacientes/lista_paciente.html",
         {"pacientes": pacientes,
          "dia": dia}
     )

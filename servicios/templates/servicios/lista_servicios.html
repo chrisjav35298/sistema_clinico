@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    <title>Listado de pacientes</title>
+{% endblock %}
+
+{% block estilos %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'pacientes/css/estilos.css' %}">
+{% endblock %}
+
+{% block contenido %}
+    <h2>Listado de pacientes</h2>
+
+
+<table class="tabla-pacientes">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Especialidad</th>
+            <th>Acción</th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for servicio in servicios %}
+            <tr>
+                <td> {{ servicio.id }}</td>
+                <td>{{ servicio.nombre|upper }}</td>
+                <td>{{ servicio.descripcion }}</td>
+                <td>{{ servicio.especialidad }}</td>
+                <td>
+                    <a href="{% url 'servicios:editar_servicio' servicio.id %}" class="btn btn-warning">Editar</a>
+                    <a href="{% url 'servicios:eliminar_servicio' servicio.id %}" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="7">No hay servicios registrados.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<!-- creamos un boton para volver al menu-->
+ <a href="{% url 'servicios:nuevo_servicio' %}" class="btn btn-success">Nuevo Servicio</a>
+<a href="{% url 'servicios:menu' %}" class="btn btn-primary">Volver al Menú</a>
+
+{% endblock %}
+
