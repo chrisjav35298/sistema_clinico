@@ -4,16 +4,27 @@
         <title>Detalle de atención clínica</title>
     {% endblock %}
 <h1></h1>
+
+
 {%block contenido%}
+
+{{ fecha }}
+
+<br>
+
+
+
+
 <table class="tabla-pacientes">
     <tr>
-        <th>ID Atención</th>
+        <th>nro</th>
         <td>{{ atencion.id }}</td>
     </tr>
 
     <tr>
         <th>Paciente</th>
         <td>{{ atencion.paciente }}</td>
+        
     </tr>
 
     <tr>

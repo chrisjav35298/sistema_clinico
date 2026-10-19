@@ -7,7 +7,11 @@ from .forms import ContactoForm, PacienteForm
 from .models import Paciente
 
 
-def detalle_atencion(request):
+def detalle_nomas(request):
+    print('observamos la info que viene en el request:', request)
+    print('que tiene el request:', request)
+    print('valor de request.method:', request.method)
+    print('valor de request.POST:', request.POST)
     atencion = {
         "id": 1001,
         "paciente": "Juan Pérez",
@@ -16,8 +20,9 @@ def detalle_atencion(request):
         "fecha": "26/05/2025",
         "estado": "Finalizada"
     }
+    fecha= datetime.datetime.now()
 
-    return render(request, "pacientes/atencion.html", {"atencion": atencion}
+    return render(request, "pacientes/atencion.html", {"atencion": atencion, "fecha": fecha}
     )
 
 def detalle_paciente(request, id):
@@ -120,7 +125,7 @@ def nuevo_paciente(request):
         form = PacienteForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("listado_pacientes")
+            return redirect("pacientes:listado_pacientes")
 
     else:
         form = PacienteForm()
@@ -129,12 +134,12 @@ def nuevo_paciente(request):
 
 
 def listado_pacientes(request):
+    print(request)
     pacientes = Paciente.objects.all()
     dia= datetime.datetime.now().day
 
     return render(
         request,
         "pacientes/lista_paciente.html",
-        {"pacientes": pacientes,
-         "dia": dia}
+        {"pacientes": pacientes, "request": request, "dia": dia}
     )

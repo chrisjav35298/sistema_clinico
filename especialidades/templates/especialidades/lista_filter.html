@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    <title>Listado de especialidades</title>
+{% endblock %}
+
+{% block estilos %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'pacientes/css/estilos.css' %}">
+{% endblock %}
+
+{% block contenido %}
+
+<h2>Listado de especialidades</h2>
+
+<form method="get">
+    <div>
+        <label for="nombre">Buscar por nombre:</label>
+        <input
+            type="text"
+            name="nombre"
+            id="nombre"
+            value="{{ nombre }}"
+            placeholder="Ej.: Pediatría"
+        >
+    </div>
+
+    <div>
+        <label for="descripcion">Buscar por descripción:</label>
+        <input
+            type="text"
+            name="descripcion"
+            id="descripcion"
+            value="{{ descripcion }}"
+            placeholder="Ej.: atención infantil"
+        >
+    </div>
+
+    <button type="submit">Buscar</button>
+
+    <a href="{% url 'especialidades:lista_filter' %}">
+        Limpiar filtros
+    </a>
+</form>
+
+<table class="tabla-pacientes">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for especialidad in especialidades %}
+            <tr>
+                <td>{{ especialidad.id }}</td>
+                <td>{{ especialidad.nombre|upper }}</td>
+                <td>{{ especialidad.descripcion }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="3">
+                    No se encontraron especialidades.
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'especialidades:menu_especialidades' %}"
+   class="btn btn-primary">
+    Volver al menú
+</a>
+{% endblock %}

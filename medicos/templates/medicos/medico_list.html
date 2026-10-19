@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    <title>Listado de médicos</title>
+{% endblock %}
+
+{% block estilos %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'pacientes/css/estilos.css' %}">
+{% endblock %}
+
+{% block contenido %}
+
+<h1>Listado de médicos</h1>
+
+<a href="{% url 'medicos:nuevo_medico' %}" class="btn btn-success">
+    Nuevo médico
+</a>
+
+<table class="tabla-pacientes">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>DNI</th>
+            <th>Matrícula</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for medico in medicos %}
+            <tr>
+                <td>{{ medico.nombre }}</td>
+                <td>{{ medico.apellido }}</td>
+                <td>{{ medico.dni }}</td>
+                <td>{{ medico.matricula }}</td>
+                <td>
+                    <a href="{% url 'medicos:detalle_medico' medico.pk %}"
+                       class="btn btn-primary">
+                        Ver
+                    </a>
+
+                    <a href="{% url 'medicos:editar_medico' medico.pk %}"
+                       class="btn btn-warning">
+                        Editar
+                    </a>
+
+                    <a href="{% url 'medicos:eliminar_medico' medico.pk %}"
+                       class="btn btn-danger">
+                        Eliminar
+                    </a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="5">No hay médicos registrados.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

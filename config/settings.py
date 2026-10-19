@@ -22,6 +22,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -32,6 +33,7 @@ INSTALLED_APPS = [
     'turnos',
     'especialidades',
     'servicios',
+    'medicos'
 ]
 
 MIDDLEWARE = [
@@ -123,3 +125,21 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+JAZZMIN_SETTINGS = {
+    "site_title": "SISTEMA_CLINICO",
+    "site_header": "Administración Sistema Clínico",
+    "site_brand": "Sistema clínico",
+    "welcome_sign": "Panel de administración institucional",
+    "copyright": "Sistema clínico",
+
+    "show_ui_builder": True,
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "flatly",
+    "navbar": "navbar-primary",
+    "sidebar": "sidebar-dark-primary",
+    "accent": "accent-info",
+    "dark_mode_theme": None,
+}

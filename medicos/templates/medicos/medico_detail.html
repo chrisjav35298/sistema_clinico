@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+    <title>Detalle del médico</title>
+{% endblock %}
+
+{% block contenido %}
+
+<h1>Detalle del médico</h1>
+
+<p><strong>Nombre:</strong> {{ medico.nombre }}</p>
+<p><strong>Apellido:</strong> {{ medico.apellido }}</p>
+<p><strong>DNI:</strong> {{ medico.dni }}</p>
+<p><strong>Matrícula:</strong> {{ medico.matricula }}</p>
+
+<h2>Especialidades</h2>
+
+<ul>
+    {% for especialidad in medico.especialidades.all %}
+        <li>{{ especialidad.nombre }}</li>
+    {% empty %}
+        <li>Este médico no tiene especialidades asociadas.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'medicos:listado_medicos' %}">
+    Volver al listado
+</a>
+
+<a href="{% url 'medicos:editar_medico' medico.pk %}">
+    Editar médico
+</a>
+
+{% endblock %}

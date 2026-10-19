@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    <title>Listado de medicos</title>
+{% endblock %}
+{% block estilos %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'pacientes/css/estilos.css' %}">
+{% endblock %}
+
+
+{% block contenido %}
+    <h1>Registrar médico</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">Guardar médico</button>
+    </form>
+
+    <a href="{% url 'medicos:listado_medicos' %}">
+        Volver al listado
+    </a>
+
+{% endblock %}
+
