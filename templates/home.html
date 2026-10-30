@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    <title>Inicio | Sistema de Gestión Clínica</title>
+{% endblock %}
+
+{% block contenido %}
+<div class="container py-4">
+
+    <!-- Banner de bienvenida / Hero -->
+    <div class="p-5 mb-4 bg-light rounded-3 border">
+        <div class="container-fluid py-2">
+            <h1 class="display-5 fw-bold text-primary">Sistema de Gestión Clínica</h1>
+            <p class="col-md-8 fs-5 text-muted">
+                Bienvenido al portal administrativo y de atención médica. Gestiona turnos, profesionales, fichas de pacientes y servicios desde un solo lugar.
+            </p>
+            <div class="d-flex gap-2 pt-2">
+
+                <a href="#" class="btn btn-primary btn-lg">Nuevo Turno</a>
+               
+            </div>
+        </div>
+    </div>
+
+    <!-- Accesos rápidos a los módulos del sistema -->
+    <div class="row g-4 py-2">
+
+        <!-- Módulo Pacientes -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body text-center p-4">
+                    <div class="display-6 text-primary mb-3">👤</div>
+                    <h5 class="card-title fw-bold">Pacientes</h5>
+                    <p class="card-text text-muted small">
+                        Padrón general, historias clínicas y registro de nuevos ingresos.
+                    </p>
+                    <a href="#" class="btn btn-sm btn-outline-primary stretched-link">Gestionar Pacientes</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Módulo Médicos -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body text-center p-4">
+                    <div class="display-6 text-success mb-3">🩺</div>
+                    <h5 class="card-title fw-bold">Médicos</h5>
+                    <p class="card-text text-muted small">
+                        Equipo profesional, matrículas, horarios de atención y guardias.
+                    </p>
+                    <a href="{% url 'medicos:listado_medicos' %}" class="btn btn-sm btn-outline-success stretched-link">Ver Profesionales</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Módulo Turnos -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body text-center p-4">
+                    <div class="display-6 text-warning mb-3">📅</div>
+                    <h5 class="card-title fw-bold">Turnos</h5>
+                    <p class="card-text text-muted small">
+                        Agenda diaria, reprogramación, cancelaciones y salas de espera.
+                    </p>
+                    <a href="#" class="btn btn-sm btn-outline-warning stretched-link">Agenda de Turnos</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Módulo Especialidades y Servicios -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body text-center p-4">
+                    <div class="display-6 text-info mb-3">🏥</div>
+                    <h5 class="card-title fw-bold">Especialidades</h5>
+                    <p class="card-text text-muted small">
+                        Catálogo de ramas médicas, consultorios y prestaciones disponibles.
+                    </p>
+                    <a href="{% url 'especialidades:menu_especialidades' %}" class="btn btn-sm btn-outline-info stretched-link">Ver Catálogo</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Resumen informativo rápido -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="alert alert-info d-flex align-items-center mb-0" role="alert">
+                <div class="me-3 fs-4">ℹ️</div>
+                <div>
+                    <strong>Estado del sistema:</strong> Base de datos activa y servicios en línea. Recuerda verificar las autorizaciones pendientes antes de confirmar turnos de laboratorio.
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

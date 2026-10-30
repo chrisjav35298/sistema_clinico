@@ -1,10 +1,11 @@
+
 <header class="encabezado">
     <div class="encabezado-contenido">
-        <h1>Sistema de Clínica</h1>
+        <h1>
+            <a href="{% url 'home' %}">Sistema de Clínica</a>
+        </h1>
 
         <nav>
-            <a href="{% url 'pacientes:menu' %}">Inicio</a>
-
             <a href="{% url 'pacientes:listado_pacientes' %}">
                 Pacientes
             </a>
@@ -16,11 +17,25 @@
             <a href="{% url 'pacientes:detalle_atencion' %}">
                 Atención
             </a>
+
             <a href="{% url 'pacientes:contacto' %}">
                 Contacto
             </a>
 
             <a href="/admin/">Administración</a>
-       </nav>
+
+            {% if user.is_authenticated %}
+                <span>Hola, {{ user.username }}</span>
+
+                <form method="post"
+                      action="{% url 'logout' %}"
+                      style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit">Cerrar sesión</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">Ingresar</a>
+            {% endif %}
+        </nav>
     </div>
 </header>

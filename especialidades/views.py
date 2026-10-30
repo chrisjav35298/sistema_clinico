@@ -2,23 +2,31 @@ from django.shortcuts import render, redirect
 import datetime
 from .models import Especialidades
 from .forms import EspecialidadForm
+from django.contrib.auth.decorators import login_required, permission_required
 
 
+@login_required
 def menu(request):
-
     fecha= datetime.datetime.now()
     return render(request, "especialidades/menu_especialidades.html", {"fecha": fecha})
 
+
+@login_required
+@permission_required('especialidades.add_especialidades', raise_exception=True)
 def nuevo(request):
     if request.method == 'POST':
         form = EspecialidadForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect("especialidades:listado_especialidades")
-
     else:
         form = EspecialidadForm()
-    return render(request, "especialidades/crear_especialidad.html", {"form": form})
+
+    return render(
+        request,
+        "especialidades/crear_especialidad.html",
+        {"form": form}
+    )
 
 
 
